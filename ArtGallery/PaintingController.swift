@@ -7,5 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
-var painting: [Painting]
+var painting: [Painting]!
+
+func loadPaintingsFromAssets() {
+    for painting in 1...2 {
+        painting
+    }
+}
+
