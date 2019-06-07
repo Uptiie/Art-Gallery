@@ -8,17 +8,44 @@
 
 import UIKit
 
+protocol PaintingTableViewCellDelegate: class {
+    func likedButtonWasTapped(on cell: PaintingTableViewCell)
+}
+
 class PaintingTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // Mark: - Outlets and Properties
+    
+    
+    @IBOutlet weak var PaintingImageView: UIImageView!
+    @IBOutlet weak var isLikedButton: UIButton!
+    
+    weak var delegate: PaintingTableViewCellDelegate?
+    
+    var painting: Painting? {
+        didSet {
+            self.updateViews()
+        }
     }
+    
+    // Mark: IBActions and Methods
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func isLikedButtonTapped(_ sender: Any) {
+        self.delegate?.likedButtonWasTapped(on: self)
+        
     }
-
+    
+    func updateViews() {
+        guard let painting = self.painting else { return }
+        self.PaintingImageView.image = painting.image
+        
+        let isLikedString = painting.isLiked ? "Unlike" : "Like"
+        self.isLikedButton.setTitle(isLikedString, for: .normal)
+    }
+    
+    
+    
+    
+    
+    
 }

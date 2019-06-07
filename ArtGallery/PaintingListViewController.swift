@@ -10,21 +10,48 @@ import UIKit
 
 class PaintingListViewController: UIViewController {
 
+    // MARK: - Outlets and Properties
+    @IBOutlet weak var tableView: UITableView!
+    
+    let paintingController = PaintingController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.tableView.dataSource = self
     }
     
+    // MARK: - Methods
+    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension PaintingListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.paintingController.paintings.count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PaintingCell", for: indexPath) as? PaintingTableViewCell else { return UITableViewCell() }
+        
+        let painting = self.paintingController.paintings[indexPath.row]
+        
+        cell.painting = painting
+        cell.delegate = self
+        
+        return cell
+        
+    }
+    
+}
 
+extension PaintingListViewController:
+PaintingTableViewCellDelegate {
+    func likedButtonWasTapped(on cell: PaintingTableViewCell) {
+        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+        
+        let painting = self.paintingController.paintings[indexPath.row]
+        
+        self.paintingController.toggleIsLiked(for: painting)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+     }
 }

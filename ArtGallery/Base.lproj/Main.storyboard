@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OGh-7G-ZCG">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,20 +10,88 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Art Gallary-->
         <scene sceneID="cFd-ca-QnK">
             <objects>
-                <viewController id="OGh-7G-ZCG" sceneMemberID="viewController">
+                <viewController title="Art Gallary" id="OGh-7G-ZCG" customClass="PaintingListViewController" customModule="ArtGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J1m-50-GO7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="340" estimatedRowHeight="340" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rmu-xi-IU8">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PaintingCell" rowHeight="298" id="B44-FO-COM" customClass="PaintingTableViewCell" customModule="ArtGallery" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="298"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B44-FO-COM" id="RWW-pL-sOL">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="297.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFX-4X-Uh4">
+                                                    <rect key="frame" x="184" y="249" width="46" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="isLikedButtonTapped:" destination="B44-FO-COM" eventType="touchUpInside" id="ahW-FI-DQp"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmX-C7-E2x">
+                                                    <rect key="frame" x="87" y="8" width="240" height="217"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qFX-4X-Uh4" secondAttribute="bottom" constant="8" id="8PU-PL-a9a"/>
+                                                <constraint firstItem="bmX-C7-E2x" firstAttribute="top" secondItem="RWW-pL-sOL" secondAttribute="top" constant="8" id="9pO-zn-ucI"/>
+                                                <constraint firstItem="qFX-4X-Uh4" firstAttribute="centerX" secondItem="RWW-pL-sOL" secondAttribute="centerX" id="CT1-av-fJx"/>
+                                                <constraint firstItem="qFX-4X-Uh4" firstAttribute="top" secondItem="bmX-C7-E2x" secondAttribute="bottom" constant="40" id="LI1-VD-bhJ"/>
+                                                <constraint firstItem="bmX-C7-E2x" firstAttribute="centerX" secondItem="RWW-pL-sOL" secondAttribute="centerX" id="Vn8-qm-XVh"/>
+                                                <constraint firstItem="qFX-4X-Uh4" firstAttribute="top" secondItem="bmX-C7-E2x" secondAttribute="bottom" constant="24" id="aoQ-HE-FDg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="PaintingImageView" destination="bmX-C7-E2x" id="ib0-kO-voK"/>
+                                            <outlet property="isLikedButton" destination="qFX-4X-Uh4" id="WY0-Yb-HgB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Rmu-xi-IU8" firstAttribute="leading" secondItem="Bp6-PC-Ycc" secondAttribute="leading" id="4uP-Ca-Ci0"/>
+                            <constraint firstItem="Rmu-xi-IU8" firstAttribute="top" secondItem="Bp6-PC-Ycc" secondAttribute="top" id="Nhh-6d-j43"/>
+                            <constraint firstItem="Bp6-PC-Ycc" firstAttribute="bottom" secondItem="Rmu-xi-IU8" secondAttribute="bottom" id="dxT-np-OUj"/>
+                            <constraint firstItem="Bp6-PC-Ycc" firstAttribute="trailing" secondItem="Rmu-xi-IU8" secondAttribute="trailing" id="eVb-XD-kFF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Bp6-PC-Ycc"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Art Gallery" id="jkf-md-siy"/>
+                    <connections>
+                        <outlet property="tableView" destination="Rmu-xi-IU8" id="k6R-7h-s5w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BwR-bQ-qBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="40" y="207"/>
+            <point key="canvasLocation" x="1859.4202898550725" y="206.91964285714286"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xdW-Wz-AsW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KxT-G7-ws6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9XU-IB-k9M">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OGh-7G-ZCG" kind="relationship" relationship="rootViewController" id="3R6-Qb-OZa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Juz-5E-8RI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="949.27536231884062" y="206.91964285714286"/>
         </scene>
     </scenes>
 </document>
